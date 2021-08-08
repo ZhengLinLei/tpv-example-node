@@ -8,6 +8,8 @@ module.exports = app => {
     // GENERATE APP ROUTES
     router.get('/', controller.getIndex);
     router.get('/add', controller.getAddNew);
+    router.get('/item', controller.getItemList);
+    router.get('/item/:barcode', controller.getItemBarcode); //API
     // router.get('/image/:idImage', controller.image);
     // //
     router.post('/post/addNew', controller.postAddNew)

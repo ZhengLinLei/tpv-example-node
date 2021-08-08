@@ -15,7 +15,27 @@ controller.getAddNew = (req, res) => {
     res.render('addNew');
 }
 
+controller.getItemList = (req, res) => {
 
+    model.getNumItemList(10, 'DESC', (err, rows)=>{
+
+        res.render('itemList', {json: JSON.stringify(rows, '', 3)});
+    });
+}
+
+controller.getItemBarcode = (req, res) => {
+
+    model.getFirstBarcode(req.params.barcode, (err, row) =>{
+
+        console.log(row)
+        if(err){
+            res.json({"status": "error", "response": "error_db"});
+        }else{
+            res.json({"status": "ok", "response": (row?row:{"empty": "空白"})})
+        }
+
+    });
+}
 
 // POST
 

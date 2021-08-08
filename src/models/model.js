@@ -13,6 +13,10 @@ model.getFirstBarcode = (param, fnc) => {
 
 }
 
+model.getNumItemList = (num, di, fnc) => {
+    db.all('SELECT * FROM `Product_data` ORDER BY `id` '+di+' LIMIT ?', [num], fnc);
+}
+
 
 // Add new item
 model.addNew = (param, fnc) =>{
