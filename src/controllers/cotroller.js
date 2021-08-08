@@ -19,7 +19,7 @@ controller.getAddNew = (req, res) => {
 
 // POST
 
-controller.postAddNew = (req, res) => {
+controller.postAddNew = async (req, res) => {
     let barcode = req.body.barcode;
     let name = req.body.name;
     let price = req.body.price;
@@ -27,9 +27,24 @@ controller.postAddNew = (req, res) => {
 
     if(barcode && name && price){
         if(!isNaN(price)){
-            if(model.addNew([barcode, name, price])){
-                res.json({"status": "ok", "response": "ok"})
-            }
+            // if(model.addNew([barcode, name, price])){
+            //     res.json({"status": "ok", "response": "ok"})
+            // }
+
+            model.getFirstBarcode(barcode, (err, row) => {
+                if(row){
+                    res.json({"status": "fill", "response": "added_before_in_db"});
+
+                }else{
+                    model.addNew([barcode, name, price], (err) => {
+                        if (err) {
+                            res.json({"status": "error", "response": "error_db"});
+                        }else{
+                            res.json({"status": "ok", "response": "ok"})
+                        }
+                    })
+                }
+            })
         }else{
             res.json({"status": "error", "response": "price_must_be_number"});
         }

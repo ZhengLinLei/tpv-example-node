@@ -38,10 +38,11 @@ window.addEventListener('load', ()=>{
                 price.value = '';
 
                 barcode.focus();
-            }else{
+            }else if(response.status == 'error'){
                 alert(`服务器回复错误: ${response.response}`)
+            }else{
+                alert('你已加过此商品， 去主机查看')
             }
-
         })
         .catch(error => {
             alert(`加速出现错误: ${error}`)
