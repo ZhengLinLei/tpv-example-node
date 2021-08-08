@@ -7,3 +7,38 @@
 html{
     scroll-behavior: smooth;
 }
+body{
+    width: 100vw;
+}
+div#loader{
+    width: 100vw;
+    background: rgba(0,0,0,.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+
+    & > div{
+        border-radius: 100%;
+        width: 80px;
+        height: 80px;
+        border: 10px solid white;
+        border-bottom: 10px solid transparent;
+        animation: load .6s linear infinite;
+    }
+
+    &.active{
+        display: flex;
+    }
+
+}
+
+@keyframes load {
+    to{
+        transform: rotate(360deg);
+    }
+}

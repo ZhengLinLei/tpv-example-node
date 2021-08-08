@@ -21,6 +21,7 @@ window.addEventListener('load', ()=>{
             price: price.value
         }
 
+        loader.classList.add('active')
         fetch('/post/addNew', {
                 method: 'POST', // or 'PUT'
                 body: JSON.stringify(data), // data can be `string` or {object}!
@@ -29,6 +30,7 @@ window.addEventListener('load', ()=>{
                 }
         }).then(res => res.json())
         .then(response => {
+            loader.classList.remove('active')
             //
             if(response.status == 'ok'){
                 alert('加入完毕');
@@ -45,6 +47,8 @@ window.addEventListener('load', ()=>{
             }
         })
         .catch(error => {
+            loader.classList.remove('active')
+
             alert(`加速出现错误: ${error}`)
         });
     });
